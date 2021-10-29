@@ -31,4 +31,5 @@ def generate_recipe(ingredients, **kwargs):
     )
 
     res = response.to_dict_recursive()
-    return res["choices"][0]["text"]
+    recipe_str = res["choices"][0]["text"]
+    return recipe_str.split("\n")
