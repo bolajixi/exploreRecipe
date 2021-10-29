@@ -5,7 +5,7 @@ from django.conf import settings
 
 def generate_recipe(ingredients, **kwargs):
     """
-    Generate a recipe given a list of ingridents
+    Generate a recipe given a list of ingredients
 
     """
     openai.api_key = os.getenv(
@@ -15,7 +15,7 @@ def generate_recipe(ingredients, **kwargs):
         "Write a recipe based on these ingredients and instructions:\n\nIngredients:"]
 
     for ingredient in ingredients:
-        prompt_sentence.append("\n"+ingredient)
+        prompt_sentence.append("\n" + ingredient)
 
     prompt_sentence.append("\n\nDirections:")
     new_prompt = "".join(prompt_sentence)
