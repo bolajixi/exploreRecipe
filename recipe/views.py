@@ -8,5 +8,5 @@ def explore_recipe(request):
     ingredients = ["Ball pepper", "Tomatoes", "Spinach"]
     recipe = generate_recipe(ingredients=ingredients)
 
-    print(recipe)
-    # return render(request, 'shop/product/list.html', context_data)
+    context_data = recipe
+    return render(request, 'recipe/index.html', context=context_data)
