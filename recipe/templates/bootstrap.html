@@ -1,3 +1,22 @@
+<style type="text/css">
+   body {
+	background: url(https://images.unsplash.com/photo-1556909211-36987daf7b4d) no-repeat !important;
+	background-size: cover !important;
+	align-items: center !important;
+	justify-content: center !important;
+	height: 100vh !important;
+    } /* Adding !important forces the browser to overwrite the default style applied by Bootstrap */
+
+    .container {
+    width:fit-content !important;
+	box-shadow: 0 0 2rem 0 rgba(0, 0, 0, .2) !important;	
+	border-radius: 10px !important;
+	background-color: rgba(255, 255, 255, .15) !important;
+	backdrop-filter: blur(5px) !important;
+}
+</style>
 {% extends 'bootstrap5/bootstrap5.html' %}
 
+
 {% block bootstrap5_title %}{% block title %}{% endblock %}{% endblock %}
+
