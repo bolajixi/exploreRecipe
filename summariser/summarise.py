@@ -1,16 +1,17 @@
 import openai
 import requests
 import json
+import os
 from bs4 import BeautifulSoup
 
-key = "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"
+
 
 class Summariser:
-    def __init__(self, key, temperature, max_tokens):
-        self.openai = openai
-        self.openai.api_key = key
+    def __init__(self, temperature, max_tokens):
         self.temperature = temperature
         self.max_tokens = max_tokens
+        
+        openai.api_key = os.getenv("OPENAI_SECRET_KEY")
 
     def generate(self, input):
         """
@@ -23,7 +24,7 @@ class Summariser:
         body = "\"\"\"" + input + "\"\"\"\n\n"
         end = "I rewrote the article in the following bullet points:" + "\"\"\"\n"
         prompt = start + body + end
-        return self.openai.Completion.create(engine="davinci", prompt = prompt, max_tokens = self.max_tokens)
+        return openai.Completion.create(engine="davinci", prompt = prompt, max_tokens = self.max_tokens)
 
     def get_only_text(self, url):
         """
@@ -91,13 +92,12 @@ Summarised text:
 
 5. Leave
 
-
 """
 
 #test summary output
 
 
-summarise = Summariser(key, 0, 100)
+summarise = Summariser(0, 100)
 test_url = "https://www.bbcgoodfood.com/recipes/basic-muffin-recipe"
 
 print("Original text: \n")
