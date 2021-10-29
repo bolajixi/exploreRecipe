@@ -8,8 +8,7 @@ def generate_recipe(ingredients, **kwargs):
     Generate a recipe given a list of ingredients
 
     """
-    openai.api_key = os.getenv(
-        settings.OPENAI_SECRET_KEY)
+    openai.api_key = settings.OPENAI_SECRET_KEY
 
     prompt_sentence = [
         "Write a recipe based on these ingredients and instructions:\n\nIngredients:"]
