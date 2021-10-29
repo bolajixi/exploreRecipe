@@ -5,12 +5,13 @@ import os
 from bs4 import BeautifulSoup
 
 
-openai.api_key = os.getenv("OPENAI_SECRET_KEY")
 
 class Summariser:
     def __init__(self, temperature, max_tokens):
         self.temperature = temperature
         self.max_tokens = max_tokens
+        
+        openai.api_key = os.getenv("OPENAI_SECRET_KEY")
 
     def generate(self, input):
         """
