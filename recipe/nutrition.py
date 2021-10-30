@@ -23,7 +23,7 @@ def get_nutrition(ingredients: List[str]) -> Dict[str, str]:
         data), headers=headers, params=params)
     nut_res = response.json()
     nutrition = {}
-    nutrition['calories'] = nut_res['calories']
+    nutrition['calories'] = str(nut_res['calories'])
     for _, nutrient in nut_res["totalNutrients"].items():
         nutrition[nutrient['label']] = str(
             round(nutrient['quantity'], ndigits=1)) + nutrient['unit']

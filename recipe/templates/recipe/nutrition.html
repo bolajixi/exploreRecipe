@@ -6,9 +6,20 @@
     nutrition Information
 {% endblock %}
 
-<div class="p-3 container">
-    <h2 class="display-6">Your Ingredients</h2>
-    {% for nutrient,quantity in nutrition.items() %}
-        <p><strong>{{ nutrient }}</strong>: {{ quantity }}</p>
-    {% endfor %} 
+{% block content %}
+<div class="row m-3 mt-5">
+    <div class="col-md-6">
+        {% include 'recipe/_ingredients.html' %}
+    </div>
+    <div class="col-md-6">
+        <div class="p-3 container">
+            <h2 class="display-6">Nutritional Information</h2>
+            <p>
+            {% for nutrient, quantity in nutrition.items %}
+                <strong>{{ nutrient }}</strong>: {{ quantity }}<br>
+            {% endfor %} 
+            </p>
+        </div>
+    </div>
 </div>
+{% endblock %}

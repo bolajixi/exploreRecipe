@@ -48,7 +48,14 @@ def explore_recipe(request):
 
 def explore_nutrition(request):
     # todo: create/reuse some form to take ingredients
-    ingredients = ["some ingr"]
+    ingredients = ["2 small green peppers, coarsely chopped",
+                   "2 C long grain brown rice, cooked",
+                   "1 lb pound extra - lean ground beef",
+                   "1 tsp onion powder",
+                   "3 garlic cloves, minced",
+                   "1 24oz jar of low - sodium spaghetti sauce(If you are using a plain spaghetti sauce, you will want to add in 1 / 4 tsp Italian seasoning, 2 tsp season salt, 2 tsp onion powder, and 1 1 / 2 tsp garlic powder to give more flavor.)",
+                   "1 1 / 2 C reduced - fat mozzarella cheese blend, divided"]
+    # print(get_nutrition(ingredients))
     context_data = {
         "nutrition": get_nutrition(ingredients),
         "ingredients": ingredients
