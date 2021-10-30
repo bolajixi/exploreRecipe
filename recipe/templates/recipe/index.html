@@ -8,9 +8,9 @@
 {% endblock %}
 
 {% block content %}
-    <div class="row">
-        <div class="col-6 offset-md-3">
-            <h1 class="display-4">Add ingredient(s)</h1>
+    <div class=" m-5 row">
+        <div class="p3 container">
+            <h1 class="display-4">Your Ingredients</h1>
             <form id="ingredient_form" method="post" action="." enctype="multipart/form-data">
     
                 {% csrf_token %}
@@ -19,11 +19,11 @@
                 {% for form in formset %}
                 <div class="ingredient-form">
                     {{ form|crispy }}
-                    <button class="align-self-center btn btn-danger delete-image-form">Delete</button>
+                    <button class="align-self-center btn btn-danger delete-image-form my-1">Delete</button>
                 </div>
                 {% endfor %}
     
-                <input type="submit" name="submit" value="Submit" class="btn btn-primary" />
+                <input type="submit" name="submit" value="Find a Recipe" class="btn btn-success" />
                 <button id="add-ingredient-form" class="btn btn-primary my-3">Add Another Ingredient</button>
             </form>
         </div>
