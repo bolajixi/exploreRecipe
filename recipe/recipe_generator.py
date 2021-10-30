@@ -17,7 +17,7 @@ def generate_recipe(ingredients, **kwargs):
     for ingredient in ingredients:
         prompt_sentence.append("\n" + ingredient)
 
-    prompt_sentence.append("\n\nDirections:")
+    prompt_sentence.append("\nRecipe Name and Directions:")
     new_prompt = "".join(prompt_sentence)
 
     response = openai.Completion.create(
@@ -47,7 +47,8 @@ def other_meal_ideas(ingredients):
     params = {"apiKey": settings.SPOONACULAR_SECRET_KEY,
               #   "ingredients": "apples,+flour,+sugar",
               "ingredients": ",+".join(ingredients),
-              "ranking": "2",
+              #   uncommenting the below minimises missing ingredients rather than maximising used ones
+              #   "ranking": "2",
               "number": "3",
               }
     response = requests.get(
