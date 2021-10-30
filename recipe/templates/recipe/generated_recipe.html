@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% load bootstrap5 %}
+
+{% block title %}
+    Here's Your Recipe!
+{% endblock %}
+
+{% block content %}
+    <div class=" mt-5 p-3 container">
+        <h2 class="display-4">Here's your Recipe!</h2>
+        {% for line in recipe %}
+            <p class= "lead">{{ line }}</p>
+        {% endfor %} 
+    </div>
+    <!-- Other Recipes -->
+    <div class="m-3">
+        <h2 class="display-4">Here's some other ideas</h2>
+        <div class="row">
+            {% for meal in other_ideas %}
+                <div class="col-md-4">
+                    <div class="p-3 container">
+                        <img src=" {{meal.image}} " alt="{{meal.title}}" style="width:100%">
+                        <div class="caption pt-2">
+                            <h2> {{meal.title}} </h2>
+                            <h6 class="lead"> Used Ingredients</h6>
+                            <ul>
+                                {% for ingredient in meal.usedIngredients %}
+                                <li> {{ingredient}} </li>
+                                {% endfor %}
+                            </ul>  
+                            <h6 class="lead"> Missing Ingredients</h6>
+                            <ul>
+                                {% for ingredient in meal.missedIngredients %}
+                                <li> {{ingredient}} </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
