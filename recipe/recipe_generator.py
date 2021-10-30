@@ -45,8 +45,8 @@ def get_ingredients(ingredient_dict_list):
 
 def other_meal_ideas(ingredients):
     params = {"apiKey": settings.SPOONACULAR_SECRET_KEY,
-              "ingredients": "apples,+flour,+sugar",
-              #   "ingredients": ",+".join(ingredients),
+              #   "ingredients": "apples,+flour,+sugar",
+              "ingredients": ",+".join(ingredients),
               "ranking": "2",
               "number": "3",
               }
