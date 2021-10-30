@@ -1,16 +1,82 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 
 {% load bootstrap5 %}
 
 {% block title %}
-    Here's Your Recipe!
+    What are your ingredients!
 {% endblock %}
 
 {% block content %}
-    <div class=" mt-5 p-3 container">
-        <h2 class="display-4">Here's your Recipe!</h2>
-        {% for line in recipe %}
-            <p class= "lead">{{ line }}</p>
-        {% endfor %} 
+    <div class="row">
+        <div class="col-6 offset-md-3">
+            <h1 class="display-4">Add ingrident(s)</h1>
+            <form id="ingredient_form" method="post" action="." enctype="multipart/form-data">
+    
+                {% csrf_token %}
+    
+                {{ formset.management_form }}
+                {% for form in formset %}
+                <div class="ingredient-form">
+                    {{ form|crispy }}
+                    <button class="align-self-center btn btn-danger delete-image-form">Delete</button>
+                </div>
+                {% endfor %}
+    
+                <input type="submit" name="submit" value="Submit" class="btn btn-primary" />
+                <button id="add-ingredient-form" class="btn btn-primary my-3">Add Another Ingredient</button>
+            </form>
+        </div>
     </div>
+
+    <script>
+        const addIngredientFormBtn = document.querySelector("#add-ingredient-form");
+        const submitFormBtn = document.querySelector('[type="submit"]');
+
+        const ingredientForm = document.getElementsByClassName("ingredient-form");
+        const mainForm = document.querySelector("#ingredient_form");
+
+        addIngredientFormBtn.addEventListener("click", function (event) {
+            event.preventDefault();
+            // Clone a New Form
+            const newingredientForm = ingredientForm[0].cloneNode(true);
+            // Insert New Form before the Submit button
+            mainForm.insertBefore(newingredientForm, submitFormBtn);
+        });
+
+        const totalForms = document.querySelector("#id_form-TOTAL_FORMS");
+
+        let formCount = ingredientForm.length - 1;
+
+        addIngredientFormBtn.addEventListener("click", function (event) {
+            event.preventDefault();
+
+            const newingredientForm = ingredientForm[0].cloneNode(true);
+
+            const formRegex = RegExp(`form-(\\d){1}-`, 'g');
+            formCount++;
+
+            ingredientForm.innerHTML = ingredientForm.innerHTML.replace(formRegex, `form-${formCount}-`);
+            mainForm.insertBefore(newImageForm, submitFormBtn);
+            totalForms.setAttribute('value', `${formCount + 1}`);
+        });
+
+        mainForm.addEventListener("click", function (event) {
+                if (event.target.classList.contains("delete-image-form")) {
+                    event.preventDefault();
+                    event.target.parentElement.remove();
+                    formCount--;
+                    updateForms();
+                    totalForms.setAttribute('value', `${formCount + 1}`);
+                }
+            });
+
+        function updateForms() {
+                let count = 0;
+                for (let form of imageForm) {
+                    const formRegex = RegExp(`form-(\\d){1}-`, 'g');
+                    form.innerHTML = form.innerHTML.replace(formRegex, `form-${count++}-`)
+                }
+            }
+    </script>
 {% endblock %}
