@@ -2,6 +2,7 @@ import os
 import openai
 import requests
 from django.conf import settings
+from typing import List, Dict
 
 
 def generate_recipe(ingredients, **kwargs):
@@ -36,14 +37,16 @@ def generate_recipe(ingredients, **kwargs):
     return recipe_str.split("\n")
 
 
-def get_ingredients(ingredient_dict_list):
+def get_ingredients(ingredient_dict_list: List[Dict[str, str]]) -> List[str]:
     ingredients = []
     for ingredient in ingredient_dict_list:
+        # ingredients.append(
+        #     str(ingredient["amount"]) + " " + ingredient["unitLong"] + " " + ingredient["name"])
         ingredients.append(ingredient["original"])
     return ingredients
 
 
-def other_meal_ideas(ingredients):
+def other_meal_ideas(ingredients: List[str]) -> List[Dict[str, str]]:
     params = {"apiKey": settings.SPOONACULAR_SECRET_KEY,
               #   "ingredients": "apples,+flour,+sugar",
               "ingredients": ",+".join(ingredients),

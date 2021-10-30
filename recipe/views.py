@@ -5,7 +5,7 @@ from .forms import IngredientForm
 from .models import Ingredient
 from django.forms import modelformset_factory
 from .recipe_generator import generate_recipe, other_meal_ideas
-
+from .nutrition import get_nutrition
 # Create your views here.
 
 
@@ -44,3 +44,13 @@ def explore_recipe(request):
 
         else:
             print(formset.errors)
+
+
+def explore_nutrition(request):
+    # todo: create/reuse some form to take ingredients
+    ingredients = ["some ingr"]
+    context_data = {
+        "nutrition": get_nutrition(ingredients),
+        "ingredients": ingredients
+    }
+    return render(request, 'recipe/nutrition.html', context=context_data)

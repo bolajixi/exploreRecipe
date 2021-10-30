@@ -51,10 +51,18 @@
                                 <li> {{ingredient}} </li>
                                 {% endfor %}
                             </ul>
-                            <form action="#" method="get">
-                                <!-- to be completed, need to make this button call generate_recipe with meal.usedIngredients+meal.missedIngredients as params  -->
-                                 <input type="submit" class="btn btn-success" value="Find the Recipe &raquo;" name="generate_recipe">
-                            </form>
+                            <div class="row"> 
+                                <form action="#" method="get" class="col-sm-4">
+                                <!-- to be completed, need to make this button call explore_recipe with meal.usedIngredients+meal.missedIngredients as params  -->
+                                    <input type="submit" class="btn btn-success shadow " value="Find the Recipe" name="generate_recipe">
+                                </form>
+                                <form action="#" method="get" class="col-sm-8">
+                                <!-- to be completed, need to make this button call explore_nutrition with meal.usedIngredients+meal.missedIngredients as params  -->
+                                    <input type="submit" class="btn btn-info shadow " value="Find Nutritional Information" name="generate_recipe">
+                                </form>
+                            </div>
+
+
                         </div>
                     </div>
 
