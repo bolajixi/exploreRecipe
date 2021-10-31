@@ -60,7 +60,7 @@ ROOT_URLCONF = 'exploreRecipe.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [(os.path.join(BASE_DIR, 'templates')), ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -141,3 +141,4 @@ STATICFILES_DIRS = [
 # Secret keys
 OPENAI_SECRET_KEY = os.getenv("OPENAI_SECRET_KEY")
 SPOONACULAR_SECRET_KEY = os.getenv("SPOONACULAR_SECRET_KEY")
+EDAMAM_SECRET_KEY = os.getenv("EDAMAM_SECRET_KEY")

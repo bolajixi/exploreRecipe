@@ -1,3 +1,5 @@
+from .nutrition import get_nutrition
+import ast
 from django.core.exceptions import NON_FIELD_ERRORS
 from django.shortcuts import render
 from .recipe_generator import generate_recipe
@@ -5,8 +7,6 @@ from .forms import IngredientForm
 from .models import Ingredient
 from django.forms import modelformset_factory
 from .recipe_generator import generate_recipe, other_meal_ideas
-
-import ast
 
 # Create your views here.
 
@@ -69,4 +69,19 @@ def explore_other_recipe(request):
                         }
         return render(request, 'recipe/generated_recipe.html', context=context_data)
 
-    # return HttpResponse('/')
+
+def explore_nutrition(request):
+    # todo: create/reuse some form to take ingredients
+    ingredients = ["2 small green peppers, coarsely chopped",
+                   "2 C long grain brown rice, cooked",
+                   "1 lb pound extra - lean ground beef",
+                   "1 tsp onion powder",
+                   "3 garlic cloves, minced",
+                   "1 24oz jar of low - sodium spaghetti sauce(If you are using a plain spaghetti sauce, you will want to add in 1 / 4 tsp Italian seasoning, 2 tsp season salt, 2 tsp onion powder, and 1 1 / 2 tsp garlic powder to give more flavor.)",
+                   "1 1 / 2 C reduced - fat mozzarella cheese blend, divided"]
+    # print(get_nutrition(ingredients))
+    context_data = {
+        "nutrition": get_nutrition(ingredients),
+        "ingredients": ingredients
+    }
+    return render(request, 'recipe/nutrition.html', context=context_data)
