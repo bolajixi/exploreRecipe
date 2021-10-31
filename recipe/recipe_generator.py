@@ -36,10 +36,10 @@ def generate_recipe(ingredients, **kwargs):
     return recipe_str.split("\n")
 
 
-def get_ingredients(ingredient_dict_list):
+def get_ingredients(ingredient_dict_list, type="original"):
     ingredients = []
     for ingredient in ingredient_dict_list:
-        ingredients.append(ingredient["original"])
+        ingredients.append(ingredient[type])
     return ingredients
 
 
@@ -57,11 +57,24 @@ def other_meal_ideas(ingredients):
     output = []
     for recipe in res:
         recipe_dict = {}
+        full_ingredient = []
+
         recipe_dict['title'] = recipe['title']
         recipe_dict['image'] = recipe['image']
+
         recipe_dict['missedIngredients'] = get_ingredients(
             recipe['missedIngredients'])
         recipe_dict['usedIngredients'] = get_ingredients(
             recipe['usedIngredients'])
+
+        for ingrident in get_ingredients(
+                recipe['missedIngredients'], type='name'):
+            full_ingredient.append(ingrident)
+
+        for ingrident in get_ingredients(
+                recipe['usedIngredients'], type='name'):
+            full_ingredient.append(ingrident)
+
+        recipe_dict['full_ingredient_list'] = ','.join(full_ingredient)
         output.append(recipe_dict)
     return output
