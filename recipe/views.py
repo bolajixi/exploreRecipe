@@ -22,7 +22,7 @@ def explore_recipe(request):
 
     if request.method == "GET":
         formset = IngredientFormset(request.GET or None)
-        return render(request, 'recipe/index.html', {'formset': formset, })
+        return render(request, 'recipe/get_ingredients.html', {'formset': formset, })
 
     elif request.method == "POST":
         formset = IngredientFormset(request.POST)

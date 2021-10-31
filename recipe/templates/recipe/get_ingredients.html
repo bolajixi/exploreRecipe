@@ -11,6 +11,7 @@
     <div class=" m-5 row">
         <div class="p3 container">
             <h1 class="display-4">Your Ingredients</h1>
+            <form id="ingredient_form" method="post">
 
             <form id="language_form" method="post">
             {% csrf_token %}
@@ -49,34 +50,26 @@
     </div>
 
     <script>
-        const addIngredientFormBtn = document.querySelector("#add-ingredient-form");
+        let ingredientForm = document.querySelectorAll(".ingredient-form");
+        let mainForm = document.querySelector("#ingredient_form");
+        let addIngredientFormBtn = document.querySelector("#add-ingredient-form");
+        let totalForms = document.querySelector("#id_form-TOTAL_FORMS");
+
         const submitFormBtn = document.querySelector('[type="submit"]');
 
-        const ingredientForm = document.getElementsByClassName("ingredient-form");
-        const mainForm = document.querySelector("#ingredient_form");
+        let formCount = ingredientForm.length-1;
 
         addIngredientFormBtn.addEventListener("click", function (event) {
             event.preventDefault();
             // Clone a New Form
-            const newingredientForm = ingredientForm[0].cloneNode(true);
+            let newingredientForm = ingredientForm[0].cloneNode(true);
+            let formRegex = RegExp(`form-(\\d){1}-`, 'g');
+            
+            formCount++;
+            newingredientForm.innerHTML = newingredientForm.innerHTML.replace(formRegex, `form-${formCount}-`);
+
             // Insert New Form before the Submit button
             mainForm.insertBefore(newingredientForm, submitFormBtn);
-        });
-
-        const totalForms = document.querySelector("#id_form-TOTAL_FORMS");
-
-        let formCount = ingredientForm.length - 1;
-
-        addIngredientFormBtn.addEventListener("click", function (event) {
-            event.preventDefault();
-
-            const newingredientForm = ingredientForm[0].cloneNode(true);
-
-            const formRegex = RegExp(`form-(\\d){1}-`, 'g');
-            formCount++;
-
-            ingredientForm.innerHTML = ingredientForm.innerHTML.replace(formRegex, `form-${formCount}-`);
-            mainForm.insertBefore(newImageForm, submitFormBtn);
             totalForms.setAttribute('value', `${formCount + 1}`);
         });
 
