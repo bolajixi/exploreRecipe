@@ -12,6 +12,21 @@
         <div class="p3 container">
             <h1 class="display-4">Your Ingredients</h1>
             <form id="ingredient_form" method="post">
+
+            <form>
+            Select a Language: 
+                <select name="language"> 
+                    <option value="en-US">English</option> 
+                    <option value="fr-FR">Français</option> 
+                    <option value="ar-AE">لْعَرَبِيَّةُ</option> 
+                    <option value="es-ES">Español</option> 
+                    <option value="zh">普通话</option> 
+                    <option value="hi-IN">हिन्दी</option> 
+                    <option value="hi-IN">Italiano</option> 
+                </select> 
+            </form>
+
+            <form id="ingredient_form" method="post" action="." enctype="multipart/form-data">
     
                 {% csrf_token %}
     
@@ -19,6 +34,7 @@
                 {% for form in formset %}
                 <div class="ingredient-form">
                     {{ form|crispy }}
+                    <button onclick="startConverting()" class='btn btn-info btn-sm' id="re"><span class="material-icons">mic</span></button>
                     <button class="align-self-center btn btn-danger delete-image-form my-1">Delete</button>
                 </div>
                 {% endfor %}
