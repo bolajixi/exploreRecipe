@@ -21,7 +21,7 @@ def explore_recipe(request):
 
     if request.method == "GET":
         formset = IngredientFormset(request.GET or None)
-        return render(request, 'recipe/index.html', {'formset': formset, })
+        return render(request, 'recipe/get_ingredients.html', {'formset': formset, })
 
     elif request.method == "POST":
         formset = IngredientFormset(request.POST)
@@ -51,7 +51,6 @@ def explore_recipe(request):
 def explore_other_recipe(request):
 
     if request.method == 'POST':
-        print('hello')
 
         meal_title = request.POST['meal_title']
         ingredients_data = request.POST['full_ingredient_list']
