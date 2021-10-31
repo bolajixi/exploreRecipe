@@ -1,5 +1,6 @@
 from .nutrition import get_nutrition
 import ast
+import re
 from django.core.exceptions import NON_FIELD_ERRORS
 from django.shortcuts import render
 from .recipe_generator import generate_recipe
@@ -51,12 +52,11 @@ def explore_recipe(request):
 def explore_other_recipe(request):
 
     if request.method == 'POST':
-        print('hello')
 
         meal_title = request.POST['meal_title']
         ingredients_data = request.POST['full_ingredient_list']
         ingredients_data = ingredients_data.strip().split(',')
-
+        print(ingredients_data)
         recipe = generate_recipe(
             ingredients=ingredients_data, recipe_name=meal_title)
 
@@ -74,15 +74,11 @@ def explore_other_recipe(request):
 
 
 def explore_nutrition(request):
-    # todo: create/reuse some form to take ingredients
-    ingredients = ["2 small green peppers, coarsely chopped",
-                   "2 C long grain brown rice, cooked",
-                   "1 lb pound extra - lean ground beef",
-                   "1 tsp onion powder",
-                   "3 garlic cloves, minced",
-                   "1 24oz jar of low - sodium spaghetti sauce(If you are using a plain spaghetti sauce, you will want to add in 1 / 4 tsp Italian seasoning, 2 tsp season salt, 2 tsp onion powder, and 1 1 / 2 tsp garlic powder to give more flavor.)",
-                   "1 1 / 2 C reduced - fat mozzarella cheese blend, divided"]
-    # print(get_nutrition(ingredients))
+    used_ingredients = re.split(
+        "',|\",", request.POST['used_ingredients'].strip(" []"))
+    missed_ingredients = re.split(
+        "',|\",", request.POST['missed_ingredients'].strip(" []"))
+    ingredients = used_ingredients + missed_ingredients
     context_data = {
         "nutrition": get_nutrition(ingredients),
         "ingredients": ingredients
