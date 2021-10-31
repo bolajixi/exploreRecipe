@@ -48,6 +48,7 @@
                                     <!-- to be completed, need to make this button call generate_recipe with meal.usedIngredients+meal.missedIngredients as params  -->
                                     {% csrf_token %}
                                     <input hidden type="text" value="{{meal.full_ingredient_list}}" name="full_ingredient_list">
+                                    <input hidden type="text" value="{{meal.title}}" name="meal_title">
                                     <input type="submit" class="btn btn-success" value="Find the Recipe &raquo;" name="generate_recipe">
                                 </form>
                                 <form action="#" method="get" class="col-sm-8">

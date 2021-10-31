@@ -5,15 +5,20 @@ from django.conf import settings
 from typing import List, Dict
 
 
-def generate_recipe(ingredients, **kwargs):
+def generate_recipe(ingredients, recipe_name=None, **kwargs):
     """
     Generate a recipe given a list of ingredients
 
     """
     openai.api_key = settings.OPENAI_SECRET_KEY
+    prompt_sentence = []
 
-    prompt_sentence = [
-        "Write a recipe based on these ingredients and instructions:\n\nIngredients:"]
+    if recipe_name:
+        prompt = f"Write a recipe based on these ingredients and instructions:\n\n{recipe_name}\n\nIngredients:"
+        prompt_sentence.append(prompt)
+    else:
+        prompt = "Write a recipe based on these ingredients and instructions:\n\nIngredients:"
+        prompt_sentence.append(prompt)
 
     for ingredient in ingredients:
         prompt_sentence.append("\n" + ingredient)

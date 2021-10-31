@@ -53,10 +53,13 @@ def explore_other_recipe(request):
     if request.method == 'POST':
         print('hello')
 
+        meal_title = request.POST['meal_title']
         ingredients_data = request.POST['full_ingredient_list']
         ingredients_data = ingredients_data.strip().split(',')
 
-        recipe = generate_recipe(ingredients=ingredients_data)
+        recipe = generate_recipe(
+            ingredients=ingredients_data, recipe_name=meal_title)
+
         recipe_name = recipe[2] if recipe and not recipe[0].isnumeric(
         ) else None
         directions = recipe[3:] if recipe else None
