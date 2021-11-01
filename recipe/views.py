@@ -84,13 +84,3 @@ def explore_nutrition(request):
         "ingredients": ingredients
     }
     return render(request, 'recipe/nutrition.html', context=context_data)
-
-
-def lang_choice(request):
-    if request.method == 'POST':
-        form = language_form(request.POST)
-    
-        if form.is_valid():
-            answer = form.cleaned_data['value']
-            print(answer)
-
